@@ -25,7 +25,7 @@ import com.josephoconnell.html.HTMLInputFilter;
 @RequestMapping("/board")
 public class BoardController {
 
-	private BoardService boardService;
+	private BoardService boardService;//12
 	
 	@Autowired
 	public BoardController(BoardService boardService) {
