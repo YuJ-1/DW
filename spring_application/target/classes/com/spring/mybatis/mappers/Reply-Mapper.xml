@@ -16,7 +16,7 @@
 		from reply
 		where bno=#{bno}
 	</select>
-	<select id="selectReplySeqNexValue" resultType="int">
+	<select id="selectReplySeqNextValue" resultType="int">
 		select reply_seq.nextval
 		from dual
 	</select>
