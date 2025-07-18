@@ -118,6 +118,6 @@ $('#pdsTable').DataTable({
 		}, "excel", "pdf", "print"]
 	}).buttons().container().appendTo('#pdsTable_wrapper .col-md-6:eq(0)');
 </script>
-</body> <!-- 테스트 -->
+</body>
 
  
