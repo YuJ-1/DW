@@ -73,7 +73,12 @@ function modify_go(){
 }
 
 </script>
+
+<script>
+	Summernote_go($("textarea#content"),"<%=request.getContextPath() %>") ;
+</script>
 </body>
+
 
 
 
