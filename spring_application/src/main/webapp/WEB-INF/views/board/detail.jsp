@@ -112,7 +112,8 @@
   
   <!-- /.content -->
 
-<%@ include file= "./reply_js.jsp" %>
+<%@ include file="./reply_js.jsp" %>
+
 
 
 <script>

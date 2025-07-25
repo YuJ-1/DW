@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-
 <!-- Modal -->
 <div id="modifyModal" class="modal modal-default fade" role="dialog">
   <div class="modal-dialog">
@@ -21,7 +20,8 @@
       </div>
     </div>
   </div>
-</div>      
+</div>  
+    
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.8/handlebars.min.js"></script>
 <script type="text/x-handlebars-template"  id="reply-list-template" >
 {{#each .}}  
@@ -162,7 +162,7 @@ function replyRegist_go(){
 <script>
 function replyModifyModal_go(rno){
 	//alert(rno);
-	//alert($("div#"+rno+"=replytext").text());
+	//alert($("div#"+rno+"-replytext").text());
 	$('#replytext').val($('div#'+rno+'-replytext').text());
 	$('h4.modal-title').text(rno);
 }
@@ -172,50 +172,56 @@ function replyModify_go(){
 	let rno=$('h4.modal-title').text();
 	let replytext=$('#replytext').val();
 	
-	let sendData={
-		"rno":rno,
-		"replytext":replytext
-	}
-	$.ajax({
-		url:"<%=request.getContextPath()%>/reply/modify",
-		method:"PUT",
-		data:JSON.stringify(sendData),
-		contentType:"application/json",
-		headers:{
-			"X-HTTP-Method-Override":"PUT"
-		},
-		success:function(result){
-			alert("수정되었습니다.");
-			getPage(currentPage);
-		},
-		error:function(error){
-			alert("댓글 수정이 불가합니다.");
-		},
-		complete:function(){
-			 #('button[data-dismiss="modal"]').click();
-		}
-	});
+    let sendData={
+         "rno":rno,
+         "replytext":replytext
+    }
+    $.ajax({
+	      url:"<%=request.getContextPath()%>/reply/modify",
+	      method:"PUT",
+	      data:JSON.stringify(sendData),
+	      contentType:"application/json",
+	      headers:{         
+	         "X-HTTP-Method-Override":"PUT"
+	      },
+	      success:function(result){
+	         alert("수정되었습니다.");         
+	         getPage(currentPage);
+	      },
+	      error:function(error){
+				alert("댓글 수정이 불가합니다.");
+		  },
+	      complete:function(){
+	          $('button[data-dismiss="modal"]').click();
+	       }
+ 	});
+    
+    
+	   
 }
 
 function replyRemove_go(){
 	//alert("click reply remove");
-	let rno=$('4.modal-title').text();
+	let rno=$('h4.modal-title').text();
 	
 	$.ajax({
-		url:"<%=request.getContextPath()%>/reply/remove?rno="+rno+"&page="+currentPage+"&bno=${board.bno}",
-		type:"delete",
-		headers:{"X-HTTP-Method-Override":"DELETE"},
-		success:function(page){
-			alert("삭제되었습니다.");
-			currentPage=page;
-			getPage(page);
-		},
-		error:function(error){
+	      url:"<%=request.getContextPath()%>/reply/remove?rno="+rno+"&page="+currentPage+"&bno=${board.bno}",
+	      type:"delete",
+	      headers:{"X-HTTP-Method-Override":"DELETE"},
+	      success:function(page){
+	    	  alert("삭제되었습니다.");
+	          currentPage=page;
+	          getPage(page);
+	      },
+	      error:function(error){
 			alert("현재 댓글 삭제가 불가합니다.");
-		},
-		complete:function(){
-			$('button[data-dismiss="modal"]').click();
-		}
-	});
+		  },
+	      complete:function(){
+	    	  $('button[data-dismiss="modal"]').click();
+	       }
+		});
 }
-</script>	
+</script>
+
+
+

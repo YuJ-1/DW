@@ -12,13 +12,13 @@
 	</select>
 	
 	<select id="countReply" resultType="int">
-		select count(bno)
+		select count(bno) 
 		from reply
 		where bno=#{bno}
 	</select>
-	<select id="selectReplySeqNextValue" resultType="int">
+	<select id="selectReplySeqNextValue" resultType="int" >
 		select reply_seq.nextval
-		from dual
+		from dual		
 	</select>
 	<insert id="insertReply" parameterType="reply">
 		insert into reply(rno,bno,replytext,replyer)
@@ -26,19 +26,18 @@
 	</insert>
 	
 	<update id="updateReply" parameterType="reply">
-		update reply
-		set
+		update reply 
+		set 
 		replytext=#{replytext},
 		updatedate=sysdate
-		where rno=#{rno}
+		where rno=#{rno}		
 	</update>
 	
 	<delete id="deleteReply" parameterType="int">
 		delete from reply
-		where rno=#{rno}
-	</delete>
+		where rno=#{rno}		
+	</delete>	
 </mapper>
-	
 
 
 

@@ -15,8 +15,10 @@ public interface ReplyService {
 	void regist(ReplyVO reply) throws SQLException;
 	
 	//수정
-	void modify(ReplyVO reply) throws SQLException;
-
+	void modify(ReplyVO reply)throws SQLException;
+	
 	//삭제
 	void remove(int rno)throws SQLException;
+	
 }
+

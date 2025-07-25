@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <body>
 <div class="wrapper">
 	 <!-- Content Header (Page header) -->
@@ -29,33 +32,38 @@
 				<div class="card card-outline card-primary">
 					<div class="card-header">
 						<h3 class="card-title">상세보기</h3>
+						<div class="card-tools">
+							<button type="button" id="modifyBtn" class="btn btn-warning" onclick="modify();">Modify</button>						
+					    	<button type="button" id="removeBtn" class="btn btn-danger" onclick="remove();">REMOVE</button>
+					   		<button type="button" id="listBtn" class="btn btn-primary" onclick="CloseWindow();">CLOSE </button>
+						</div>
 					</div>
 					<div class="card-body">
 						<div class="form-group col-sm-12">
 							<label for="title">제 목</label>
 							<input type="text" class="form-control" id="title" 
-								value="" readonly />							
+								value="${pds.title }" readonly />							
 						</div>	
 						<div class="col-sm-12 row">
 							<div class="form-group col-sm-4" >
 								<label for="writer">작성자</label>
 								<input type="text" class="form-control" id="writer" 
-									 value="" readonly />
+									 value="${pds.writer }" readonly />
 							</div>		
 							
 							<div class="form-group col-sm-4" >
 								<label for="regDate">작성일</label>
 								<input type="text" class="form-control" id="regDate" 
-									value="" />" readonly />
+									value="<fmt:formatDate pattern="yyyy-MM-dd" value="${pds.regDate }" />" readonly />
 							</div>	
 							<div class="form-group col-sm-4" >
 								<label for="viewcnt">조회수</label>
-								<input type="text" class="form-control" id="viewcnt" value="" readonly />
+								<input type="text" class="form-control" id="viewcnt" value="${pds.viewcnt }" readonly />
 							</div>	
 						</div>	
 						<div class="form-group col-sm-12">
 							<label for="content">내 용</label>
-							<div ></div>	
+							<div >${pds.content }</div>	
 						</div>
 						<div class="form-group col-sm-12">
 							<div class="card card-outline card-success">
@@ -66,7 +74,18 @@
 								<div class="card-footer">
 									<div class="row">
 										<!-- attaches -->
-																	
+										<c:forEach items="${pds.attachList }" var="attach">
+											<div class="col-sm-4"  style="cursor:pointer;"
+											     onclick="location.href='getFile?ano=${attach.ano }';" >
+												<div class="info-box">	
+													<span class="info-box-icon bg-yellow"><i class="fa fa-copy"></i></span>
+													<div class="info-box-content">														
+														<span class ="info-box-number">
+															${attach.fileName.split('\\$\\$')[1] }</span>
+													</div>
+												</div>
+											</div>
+										</c:forEach>										
 									</div>
 								</div>				
 							</div>
@@ -75,10 +94,7 @@
 					</div>
 					<div class="card-footer">
 						
-							<button type="button" id="modifyBtn" class="btn btn-warning" onclick="modify();">Modify</button>						
-					    	<button type="button" id="removeBtn" class="btn btn-danger" onclick="remove();">REMOVE</button>
-					   
-					    <button type="button" id="listBtn" class="btn btn-primary" onclick="CloseWindow();">CLOSE </button>
+							
 					</div>									
 				</div><!-- end card -->				
 			</div><!-- end col-md-12 -->
@@ -86,4 +102,27 @@
 		
     </section>
 </div>
+
+
+<script>
+function modify(){
+	//alert("click modify btn");
+	location.href="modify?pno=${pds.pno}";
+}
+function remove(){
+	//alert("click remove btn");
+	let answer = confirm("정말 삭제하시겠습니다.");
+	if(!answer) return;
+	
+	location.href="remove?pno=${pds.pno}";
+}
+
+</script>
 </body>
+
+
+
+
+
+
+

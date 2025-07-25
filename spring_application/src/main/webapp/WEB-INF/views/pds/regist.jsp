@@ -4,6 +4,10 @@
     
 
 <head>
+<!-- summernote -->
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/summernote/summernote-bs4.min.css">
+<!-- Summernote -->
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/summernote/summernote-bs4.min.js"></script>
 </head>
 
 <body>
@@ -33,6 +37,10 @@
 				<div class="card card-outline card-info">
 					<div class="card-header">
 						<h4>글등록</h4>
+						<div class="card-tools">
+								<button type="button" class="btn btn-primary" id="registBtn" onclick="regist_go();">등 록</button>
+								<button type="button" class="btn" id="cancelBtn" onclick="CloseWindow();">취 소</button>						
+						</div>
 					</div><!--end card-header  -->
 					<div class="card-body">
 						<form enctype="multipart/form-data" role="form" method="post" action="regist.do" name="registForm">
@@ -65,9 +73,7 @@
 						</form>
 					</div><!--end card-body  -->
 					<div class="card-footer">
-						<button type="button" class="btn btn-primary" id="registBtn" onclick="regist_go();">등 록</button>
-						&nbsp;&nbsp;&nbsp;&nbsp;
-						<button type="button" class="btn" id="cancelBtn" onclick="CloseWindow();">취 소</button>
+					
 					</div><!--end card-footer  -->
 				</div><!-- end card -->				
 			</div><!-- end col-md-12 -->
@@ -75,10 +81,62 @@
     </section>
 </div>
 
+<script>
+var dataNum=0;
 
+function addFile_go(){
+	//alert("!!!!");
+	if($('input[name="uploadFile"]').length >=5){
+		alert("파일추가는 5개까지만 가능합니다.");
+		return;
+	}
+	
+	let div=$('<div>').addClass("inputRow").attr("data-no",dataNum);
+	let input=$('<input>').attr({"type":"file","name":"uploadFile"}).css("display","inline");
+	let button = "<button onclick='remove_go("+dataNum+");' style='border:0;outline:0;' class='badge bg-red' type='button'>X</button>";
+
+	div.append(input).append(button);
+	$('.fileInput').append(div);
+	
+	dataNum++;
+}
+
+function remove_go(num){
+	$('div[data-no="'+num+'"]').remove();
+}
+
+$('.fileInput').on('change',"input[name='uploadFile']",function(event){
+	if(this.files[0].size > 1024*1024*40){
+		alert("첨부파일크기는 40MB 이하만 가능합니다.");
+		this.value="";				
+	}
+});
+
+</script>
 
 <script>
+Summernote_go($("textarea#content"),"<%=request.getContextPath() %>") ;
+</script>
 
+<script>
+function regist_go(){
+	//alert("click regist btn");
+	if($("input[name='title']").val()==""){ 
+		alert("제목은 필수입니다.");
+		$("input[name='title']").focus();
+		return;
+	}
+	
+	var inputs = $('input[name="uploadFile"]');
+	for(var input of inputs){
+		if(input.value==""){
+			input.disabled=true;
+		}
+	}
+	
+	$("form[role='form']").submit();
+	
+}
 </script>
 </body>
 

@@ -104,3 +104,8 @@
 		where pno=#{pno}
 	</delete>
 </mapper>
+
+
+
+
+

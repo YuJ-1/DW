@@ -3,14 +3,12 @@ package com.application.dto;
 import java.util.Date;
 
 public class ReplyVO {
-	
-	private int rno;				//고유번호
-	private int bno;				//게시글번호
-	private String replytext;		//댓글내용
-	private String replyer;			//작성자
-	private Date regdate;			//등록일
-	
-	
+
+	private int rno; 			//고유번호
+	private int bno;			//게시글번호
+	private String replytext;	//댓글내용
+	private String replyer;		//작성자
+	private Date regdate;		//등록일
 	public int getRno() {
 		return rno;
 	}
@@ -41,7 +39,6 @@ public class ReplyVO {
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
 	}
-
 	
 	
 }

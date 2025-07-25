@@ -118,3 +118,8 @@ $(".person-info").css({
 Summernote_go($("textarea#content"),'<%=request.getContextPath()%>');
 </script>
 </body>
+
+
+
+
+

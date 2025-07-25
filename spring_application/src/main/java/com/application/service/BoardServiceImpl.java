@@ -15,7 +15,6 @@ public class BoardServiceImpl implements BoardService{
 	private String summernotePath;
 	private ReplyDAO replyDAO;
 	
-	
 	public BoardServiceImpl(BoardDAO boardDAO,String summernotePath,ReplyDAO replyDAO) {
 		this.summernotePath = summernotePath;
 		this.boardDAO = boardDAO;
@@ -31,10 +30,10 @@ public class BoardServiceImpl implements BoardService{
 		
 		// reply count 입력
 		for (BoardVO board : boardList) {
-			int replycut = replyDAO.countReply(board.getBno());
-			board.setReplycnt(replycut);
+			int replycnt = replyDAO.countReply(board.getBno());
+			board.setReplycnt(replycnt);
 		}
-					
+		
 		return boardList;
 	}
 

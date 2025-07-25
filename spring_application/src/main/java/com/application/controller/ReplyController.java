@@ -67,18 +67,18 @@ public class ReplyController {
 	}
 	
 	@PutMapping("/modify")
-	public ResponseEntity<String> modify(@RequestBody ReplyVO reply)throws Exception{
+	public ResponseEntity<String> modify(@RequestBody ReplyVO reply)throws Exception {
 		ResponseEntity<String> entity = null;
 		
 		reply.setReplytext(HTMLInputFilter.htmlSpecialChars(reply.getReplytext()));
-		
+
 		replyService.modify(reply);
 		entity = new ResponseEntity<String>(HttpStatus.OK);
 		
-		return entity;
+		return entity;		
 	}
 	@DeleteMapping(value = "/remove")
-	public ResponseEntity<String> remove(int rno, int bno, int page)throws Exception{
+	public ResponseEntity<String> remove(int rno, int bno, int page)throws Exception {
 		ResponseEntity<String> entity = null;
 		
 		replyService.remove(rno);
@@ -97,3 +97,13 @@ public class ReplyController {
 		return entity;
 	}
 }
+
+
+
+
+
+
+
+
+
+

@@ -15,6 +15,4 @@ public interface ReplyDAO {
 	void insertReply(ReplyVO reply)throws SQLException;
 	void updateReply(ReplyVO reply)throws SQLException;
 	void deleteReply(int rno)throws SQLException;
-
 }
-
