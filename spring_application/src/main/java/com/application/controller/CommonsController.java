@@ -52,7 +52,7 @@ public class CommonsController {
 	public String logout(HttpSession session) {
 		String url="redirect:/";
 		
-		session.invalidate(); //세션 갱신!!!!
+		session.invalidate(); //세션 갱신
 		
 		return url;
 	}
